@@ -96,3 +96,6 @@ To revoke a client, you have to generate a new certificate revocation list(CRL) 
 ```
 easyrsa/easyrsa3/crl.pem
 ```
+
+## Attribution
+This project heavily used the blogpost (Create a AWS VPN Client Endpoint with CDK)[https://medium.com/aws-factory/create-a-aws-vpn-client-endpoint-with-cdk-f0f4db221336] by (Marc Logemann)[https://twitter.com/logemann]:
