@@ -1,18 +1,17 @@
-# Welcome to your CDK TypeScript project!
+# AWS CDK VPN
 
-This is a blank project for TypeScript development with CDK.
+This is project that provides a way to deploy an AWS VPN to your VPC.
+It uses CDK to deploy the AWS VPN and (easyrsa)[https://github.com/OpenVPN/easy-rsa] to administer the clients.
+Easy RSA is the recommended way to do mutual authentication for VPN by AWS.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+AWS VPN is great to provide devops access to private subnets without exposing it to the internet.
+For example, access to EC2 machines or a RDS database.
 
-## Useful commands
+This project contains a submodule to easyrsa so checkout the project with:
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
-
+```
+git clone --recurse-submodules https://github.com/snorberhuis/aws-cdk-vpn.git
+```
 
 ## Setting up the Server CA.
 Reference: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html#mutual
@@ -70,6 +69,10 @@ You can find the certificate in `easy-sra/easyrsa3/pki/private/client1.domain.tl
 1. You can now use the configuration!
 To create more clients, you can generate more clients in `easyrsa`
 and change the certificate and key in the file.
+
+```
+./easyrsa build-client-full client2.domain.tld nopass
+```
 
 ## Revoking Client Certificates
 Reference: https://aws.amazon.com/premiumsupport/knowledge-center/client-vpn-revoke-access-specific-client/
