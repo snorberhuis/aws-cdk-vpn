@@ -13,6 +13,8 @@ This project contains a submodule to easyrsa so checkout the project with:
 git clone --recurse-submodules https://github.com/snorberhuis/aws-cdk-vpn.git
 ```
 
+You can see an example of implementation in `bin/example.ts`.
+
 ## Setting up the Server CA.
 Reference: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html#mutual
 
