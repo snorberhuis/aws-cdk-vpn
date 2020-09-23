@@ -1,13 +1,9 @@
 {
-  "name": "aws-vpn-cdk",
+  "name": "aws-cdk-vpn",
   "version": "0.1.0",
-  "bin": {
-    "aws-vpn-cdk": "bin/aws-vpn-cdk.js"
-  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
     "cdk": "cdk"
   },
   "devDependencies": {

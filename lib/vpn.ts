@@ -19,6 +19,7 @@ export interface VpnProps {
     clientCertificateArn: string
 
     clientCidrBlock: string
+    vpcName?: string
 
     stackProps?: cdk.StackProps
 }
@@ -76,7 +77,10 @@ export class VpnStack extends cdk.Stack {
         let i = 0;
         const dependables = new cdk.ConcreteDependable();
 
-        const vpc = ec2.Vpc.fromLookup(this, "vpc", {isDefault: true})
+        const vpc = ec2.Vpc.fromLookup(this, "vpc", {
+            vpcName: props.vpcName,
+            isDefault: (!props.vpcName),
+        })
 
         vpc.privateSubnets.map(subnet => {
             let networkAsc = new CfnClientVpnTargetNetworkAssociation(this, 'ClientVpnNetworkAssociation-' + i, {
@@ -94,16 +98,6 @@ export class VpnStack extends cdk.Stack {
             description: "Allow all"
         });
 
-        // add routs for two subnets so that i can surf the internet while in VPN (useful when splitTunnel is off)
-        // let x = 0;
-        // vpc.privateSubnets.map(subnet => {
-        //     new CfnClientVpnRoute(this, `CfnClientVpnRoute${x}` , {
-        //         clientVpnEndpointId: endpoint.ref,
-        //         destinationCidrBlock: "0.0.0.0/0",
-        //         description: "Route to all",
-        //         targetVpcSubnetId: vpc.privateSubnets[x].subnetId!,
-        //     }).node.addDependency(dependables);
-        //     x++;
-        // });
+
     }
 }
